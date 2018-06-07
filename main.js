@@ -37,7 +37,7 @@ function listenToUser(canvas){
   if (document.body.ontouchstart !== undefined) {
 //触屏设备
     canvas.ontouchstart=function(aaa){
-     console.log("开始摸我了")
+     console.log("开始摸我了hhhh")
      
      var x=aaa.touches[0].clientX
      var y=aaa.touches[0].clientY
