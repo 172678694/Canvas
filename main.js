@@ -7,14 +7,36 @@ listenToUser(canvas)
 var eraserEnabled= false
 eraser.onclick=function(){
   eraserEnabled=true;
-  actions.className="actions x"
+  eraser.classList.add('active')
+  pen.classList.remove('active')
 }
-brush.onclick=function(){
+pen.onclick=function(){
   eraserEnabled=false;
-  actions.className="actions "
+  pen.classList.add('active')
+  eraser.classList.remove('active')
 }
 
+red.onclick=function(){
+  ctx.strokeStyle='red';
+  red.classList.add('active')
+  green.classList.remove('active')
+  blue.classList.remove('active')
 
+}
+green.onclick=function(){
+  ctx.strokeStyle='green'
+  red.classList.remove('active')
+  green.classList.add('active')
+  blue.classList.remove('active')
+
+}
+blue.onclick=function(){
+  ctx.strokeStyle='blue'
+  red.classList.remove('active')
+  green.classList.remove('active')
+  blue.classList.add('active')
+
+}
 /*************/
 function autoSetCanvasSize(canvas){
   setCanvasSize()
@@ -104,7 +126,7 @@ function listenToUser(canvas){
 
 function drawCircle(x,y,r){
   ctx.beginPath();
-  ctx.fillStyle='black'
+ 
   ctx.arc(x,y,r,0,Math.PI*2);
   ctx.fill();
 }
@@ -112,7 +134,7 @@ function drawCircle(x,y,r){
 function drawLine(x1,y1,x2,y2){
     ctx.beginPath();
     ctx.lineWidth=5
-    ctx.strokeStyle='black';
+    
     ctx.moveTo(x1,y1);
     ctx.lineTo(x2,y2);
     ctx.stroke();
