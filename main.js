@@ -1,5 +1,6 @@
 var canvas=document.getElementById('xxx');
 var ctx=canvas.getContext('2d');
+var lineWidth=5;
 
 autoSetCanvasSize(canvas)
 listenToUser(canvas)
@@ -37,6 +38,27 @@ blue.onclick=function(){
   blue.classList.add('active')
 
 }
+thin.onclick=function(){
+  lineWidth=5
+}
+thick.onclick=function(){
+  lineWidth=10
+}
+clear.onclick=function(){
+  ctx.clearRect(0,0,canvas.width,canvas.height)
+
+}
+download.onclick=function(){
+  var url=canvas.toDataURL("image/png")
+  console.log(url)
+  var xxx=document.createElement('a')
+  document.body.appendChild(xxx)
+  xxx.href=url
+  xxx.download="我的画"
+  xxx.target="_blank"
+  xxx.click()
+}
+
 /*************/
 function autoSetCanvasSize(canvas){
   setCanvasSize()
@@ -133,7 +155,7 @@ function drawCircle(x,y,r){
 
 function drawLine(x1,y1,x2,y2){
     ctx.beginPath();
-    ctx.lineWidth=5
+    ctx.lineWidth=lineWidth;
     
     ctx.moveTo(x1,y1);
     ctx.lineTo(x2,y2);
