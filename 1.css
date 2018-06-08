@@ -1,6 +1,9 @@
 #xxx{
   
   display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 ol,li{
@@ -35,6 +38,7 @@ body{
 }
   .actions svg.active{
   	transform: scale(1.2);
+  	fill:red;
   }
 
   .colors{
