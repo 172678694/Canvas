@@ -1,6 +1,3 @@
-document.body.ontouchstart=function(eee){
-  eee.preventDefault()
-}
 var canvas=document.getElementById('canvas')
 var ctx=canvas.getContext('2d')
 var lineWidth= 3
@@ -81,7 +78,7 @@ download.onclick=function(){
 function autoSetSize(canvas){
   setSize()
   window.onresize=function(){
-  setSize()
+    setSize()
   }
 
   function setSize(){
@@ -92,12 +89,20 @@ function autoSetSize(canvas){
   }
 }
 
+function drawLine(x1,y1,x2,y2){
+    ctx.beginPath(); 
+    ctx.lineWidth=lineWidth          
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);           
+    ctx.stroke()
+    ctx.closePath()
+}
+  
 function listenToUser(canvas){
   var using=false;
   var lastPoint={x:undefined,y:undefined}
   
-  if(document.body.ontouchstart !== undefined){
-      //触屏设备
+  if(document.body.ontouchstart !== undefined){             //设备判断
       canvas.ontouchstart=function(a){
           console.log('开始触屏')
           var x=a.touches[0].clientX
@@ -109,7 +114,6 @@ function listenToUser(canvas){
           }else{         
               lastPoint={x:x,y:y}
           }
-  
       }
       
       canvas.ontouchmove=function(a){
@@ -125,13 +129,12 @@ function listenToUser(canvas){
               lastPoint=newPoint              
           }
       }
-      
       canvas.ontouchend=function(a){
           console.log('结束触屏')
           using=false
       }
-  }else{
-      //非触屏设备
+
+  }else{   //非触屏设备
       canvas.onmousedown=function(a){
           var x=a.clientX
           var y=a.clientY
@@ -144,7 +147,7 @@ function listenToUser(canvas){
           }
       }
       
-      canvas.onmousemove=function(a){
+      canvas.onmousedown=function(a){
           var x=a.clientX
           var y=a.clientY
           if(!using){return}
@@ -165,12 +168,5 @@ function listenToUser(canvas){
 }
 
 
-function drawLine(x1,y1,x2,y2){
-  ctx.lineWidth=lineWidth
-  ctx.beginPath();           
-  ctx.moveTo(x1, y1);
-  ctx.lineTo(x2, y2);           
-  ctx.stroke()
-}
 
 
