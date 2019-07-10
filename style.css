@@ -1,11 +1,9 @@
-
 .icon {
     width: 1em; height: 1em;
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;
 }
-
 ol,ul{
     list-style:none;
     margin: 0;
@@ -13,8 +11,8 @@ ol,ul{
 }
 body{
     margin: 0px;
-    
 }
+
 #canvas{
     display: block;
     overflow: hidden;
@@ -22,76 +20,95 @@ body{
     top: 0;
     left: 0;
 }
+
 .actions{
     position:fixed;
-    left: 0;
-    top: 0;
+    left:50%;
+    bottom:20px;
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    margin-left: -140px;
 }
-
+.actions>li{
+    transition: all 0.3s;
+    border-radius: 50%;
+    padding: 6px;
+    margin: 10px;
+}
+.actions li.active{
+    box-shadow: 0px 0px 12px  #00ccff;
+    color: #00ccff;
+    transform:scale(1.2);
+}
 .actions svg{
     width: 1.8em;
     height: 1.8em;
-    transition: all 0.3s;
-    padding: 6px;
 }
 
-.actions svg.active{
-    fill: red;
-    transform:scale(1.2);
-}
-
-ul{
+.colors{
     position: fixed;
-    top:60px;
+    top:30%;
     left:25px;
-
 }
-
-ul>li{
-    width: 1.5em;
-    height: 1.5em;
-    box-shadow: 0 0 2px rgba(0,0,0,0.1);
+.colors>li{
+    width: 1.4em;
+    height: 1.4em;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
     border-radius: 50%;
     margin: 15px 0px;
     transition: all 0.3s;
+    border: 3px solid white
 }
-
-ul>li.red{
-    background-color: red;
+.colors>li.white{
+    background-color: white;
 }
-
-ul>li.green{
-    background-color:green;
-}
-
-ul>li.blue{
-    background-color: blue;
-}
-
-ul>li.black{
+.colors>li.black{
     background-color:black;
 }
-
-.colors li.active{
-    transform:scale(1.2);
+.colors>li.red{
+    background-color: red;
+}
+.colors>li.blue{
+    background-color: rgba(0, 102, 255);
+}
+.colors>li.green{
+    background-color:rgba(51, 204, 102);
+}
+.colors>li.grey{
+    background-color:rgba(128, 128, 128);
+}
+.colors>li.yellow{
+    background-color:yellow;
+}
+.colors>li.active{
+    box-shadow: 0px 0px 12px #00ccff;
+    transform:scale(1.1);
 }
 
 .sizes{
     position: fixed;
-    top:60px;
-    right:15px;
-    
+    top:40%;
+    right:25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .sizes>li{
-    width: 30px;
-    height: 0;
-    margin: 20px 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 15px 0;
+    background-color: grey;
+    transition: all 0.3s;
 }
-ol>li.thin{
-    border-top: 3px solid black;
+.sizes>li.medium{
+    border: 5px solid grey;
 }
-
-ol>li.thick{
-    border-top: 6px solid black;
+.sizes>li.thick{
+    border: 10px solid grey;
+}
+.sizes>li.active{
+    box-shadow: 0px 0px 12px #00ccff;
+    transform:scale(1.1);
 }

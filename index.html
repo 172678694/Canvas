@@ -1,40 +1,55 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的画布</title>
     <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
     <canvas id="canvas" width="300" height="300"></canvas>
-    <div id='actions' class="actions ">
-        <svg class="icon active" id=brush aria-hidden="true">
-            <use xlink:href="#icon-pen"></use>
-        </svg>
-        <svg class="icon" id=eraser aria-hidden="true">
-            <use xlink:href="#icon-eraser1"></use>
-        </svg>
-        <svg class="icon" id=clear aria-hidden="true">
-            <use xlink:href="#icon-clearthecache"></use>
-        </svg>
-        <svg class="icon" id=download aria-hidden="true">
-            <use xlink:href="#icon-download"></use>
-        </svg>
-    </div>
+    <ul id="actions" class="actions ">
+        <li class="active" id=brush>
+            <svg class="icon "  aria-hidden="true">
+                <use xlink:href="#icon-pen"></use>
+            </svg>
+        </li>
+        <li id="eraser">
+            <svg class="icon"  aria-hidden="true">
+                <use xlink:href="#icon-eraser1"></use>
+            </svg>
+        </li>
+        <li id="clear">
+            <svg class="icon"  aria-hidden="true">
+                <use xlink:href="#icon-clearthecache"></use>
+            </svg>
+        </li>
+        <li id="download">
+            <svg class="icon"  aria-hidden="true">
+                <use xlink:href="#icon-download"></use>
+            </svg>
+        </li>
+    </ul>
     <ul class="colors">
+        <li id=white class="white"></li>
         <li id=black class="black active "></li>
         <li id=red class="red "></li>
-        <li id=green class="green"></li>
         <li id=blue class="blue"></li>
-        
+        <li id=yellow class="yellow"></li>
+        <li id=green class="green"></li>
+        <li id=grey class="grey"></li>
     </ul>
     <ol class="sizes">
-        <li id="thin" class="thin" ></li>
-        <li id="thick" class="thick" ></li>
+        <li id="thin" class="thin active"></li>
+        <li id="medium" class="medium"></li>
+        <li id="thick" class="thick"></li>
     </ol>
-
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
     <script src="./main.js"></script>
     <script src="//at.alicdn.com/t/font_996867_4bub9vzuwpu.js"></script>
 </body>
+
 </html>

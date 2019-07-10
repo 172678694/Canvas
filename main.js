@@ -8,59 +8,81 @@ listenToUser(canvas)
 var usingEraser = false
 eraser.onclick = function () {
     usingEraser = true
-    eraser.classList.add('active')
-    brush.classList.remove('active')
+    $('.actions>li.active').removeClass('active')
+    $('#eraser').addClass('active')
 }
 
 brush.onclick = function () {
     usingEraser = false
-    brush.classList.add('active')
-    eraser.classList.remove('active')
+    $('.actions>li.active').removeClass('active')
+    $('#brush').addClass('active')
 }
 
-black.onclick = function () {
-    ctx.strokeStyle = "black"
-    black.classList.add('active')
-    red.classList.remove('active')
-    green.classList.remove('active')
-    blue.classList.remove('active')
-    //用jQuery上面三句可以用$('.active').removeClass('active')一句代替
-}
 
-red.onclick = function () {
+$('#black').on('click',()=>{
+    $('.colors>li.active').removeClass('active')
+    $('#black').addClass('active')
+})
+// black.onclick = function () {
+//     ctx.strokeStyle = "black"
+//     black.classList.add('active')
+//     red.classList.remove('active')
+//     green.classList.remove('active')
+//     blue.classList.remove('active')
+//     //用jQuery上面三句可以用$('.active').removeClass('active')一句代替
+// }
+$('#white').on('click',()=>{
+    $('.colors>li.active').removeClass('active')
+    $('#white').addClass('active')
+    ctx.strokeStyle = "white"
+})
+$('#red').on('click',()=>{
+    $('.colors>li.active').removeClass('active')
+    $('#red').addClass('active')
     ctx.strokeStyle = "red"
-    red.classList.add('active')
-    black.classList.remove('active')
-    green.classList.remove('active')
-    blue.classList.remove('active')
-}
-
-green.onclick = function () {
+})
+$('#green').on('click',()=>{
+    $('.colors>li.active').removeClass('active')
+    $('#green').addClass('active') 
     ctx.strokeStyle = "green"
-    green.classList.add('active')
-    black.classList.remove('active')
-    red.classList.remove('active')
-    blue.classList.remove('active')
-}
-
-blue.onclick = function () {
+})
+$('#blue').on('click',()=>{
+    $('.colors>li.active').removeClass('active')
+    $('#blue').addClass('active')
     ctx.strokeStyle = "blue"
-    blue.classList.add('active')
-    black.classList.remove('active')
-    red.classList.remove('active')
-    green.classList.remove('active')
-}
+})
+$('#grey').on('click',()=>{
+    $('.colors>li.active').removeClass('active')
+    $('#grey').addClass('active')
+    ctx.strokeStyle = "grey"
+})
+$('#yellow').on('click',()=>{
+    $('.colors>li.active').removeClass('active')
+    $('#yellow').addClass('active')
+    ctx.strokeStyle = "yellow"
+})
+
 
 thin.onclick = function () {
     lineWidth = 3
+    $('.sizes>li.active').removeClass('active')
+    $('#thin').addClass('active')
 }
-
-thick.onclick = function () {
+medium.onclick = function () {
     lineWidth = 6
+    $('.sizes>li.active').removeClass('active')
+    $('#medium').addClass('active')
+}
+thick.onclick = function () {
+    lineWidth = 9
+    $('.sizes>li.active').removeClass('active')
+    $('#thick').addClass('active')
 }
 
 clear.onclick = function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    $('.actions>li.active').removeClass('active')
+    $('#clear').addClass('active')
 }
 
 download.onclick = function () {
@@ -71,6 +93,8 @@ download.onclick = function () {
     saveCanvas.download = "我的画"
     saveCanvas.target = "_blank"
     saveCanvas.click()
+    $('.actions>li.active').removeClass('active')
+    $('#download').addClass('active')
 }
 
 
@@ -137,10 +161,7 @@ function listenToUser(canvas) {
         }
 
     } else {   //非触屏设备
-        console.log(1)
         canvas.onmousedown = function (a) {
-            console.log(2)
-            console.log(a)
             var x = a.clientX
             var y = a.clientY
             using = true
