@@ -8,7 +8,7 @@ listenToUser(canvas)
 var isUsingEraser = false
 /*功能选择*/
 $('.actions').on('click','li',function(e){
-    $('.colors>li.active').removeClass('active')
+    $('.actions>li.active').removeClass('active')
     $(e.currentTarget).addClass('active')
 })
 
