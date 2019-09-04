@@ -5,15 +5,16 @@ var lineWidth = 3
 autoSetSize(canvas)
 listenToUser(canvas)
 
-var usingEraser = false
+var isUsingEraser = false
+/*功能选择*/
 eraser.onclick = function () {
-    usingEraser = true
+    isUsingEraser = true
     $('.actions>li.active').removeClass('active')
     $('#eraser').addClass('active')
 }
 
 brush.onclick = function () {
-    usingEraser = false
+    isUsingEraser = false
     $('.actions>li.active').removeClass('active')
     $('#brush').addClass('active')
 }
@@ -128,26 +129,23 @@ function listenToUser(canvas) {
     var lastPoint = { x: undefined, y: undefined }
 
     if (document.body.ontouchstart !== undefined) {             //设备判断
-        canvas.ontouchstart = function (a) {
-            console.log(a)
-            console.log('开始触屏')
-            var x = a.touches[0].clientX
-            var y = a.touches[0].clientY
+        canvas.ontouchstart = function (e) {
+            var x = e.touches[0].clientX
+            var y = e.touches[0].clientY
             using = true
 
-            if (usingEraser) {
+            if (isUsingEraser) {
                 ctx.clearRect(x - 5, y - 5, 10, 10)
             } else {
                 lastPoint = { x: x, y: y }
             }
         }
 
-        canvas.ontouchmove = function (a) {
-            console.log('持续触屏')
-            var x = a.touches[0].clientX
-            var y = a.touches[0].clientY
+        canvas.ontouchmove = function (e) {
+            var x = e.touches[0].clientX
+            var y = e.touches[0].clientY
             if (!using) { return }
-            if (usingEraser) {
+            if (isUsingEraser) {
                 ctx.clearRect(x - 5, y - 5, 10, 10)
             } else {
                 var newPoint = { x: x, y: y }
@@ -155,39 +153,38 @@ function listenToUser(canvas) {
                 lastPoint = newPoint
             }
         }
-        canvas.ontouchend = function (a) {
-            console.log('结束触屏')
+        canvas.ontouchend = function (e) {
             using = false
         }
 
     } else {   //非触屏设备
-        canvas.onmousedown = function (a) {
-            var x = a.clientX
-            var y = a.clientY
+        canvas.onmousedown = function (e) {
+            var x = e.clientX
+            var y = e.clientY
             using = true
 
-            if (usingEraser) {
+            if (isUsingEraser) {
                 ctx.clearRect(x, y, 10, 10)
             } else {
                 lastPoint = { x: x, y: y }
             }
         }
 
-        canvas.onmousedown = function (a) {
-            var x = a.clientX
-            var y = a.clientY
-            if (!using) { return }
-            if (usingEraser) {
-
-                ctx.clearRect(x - 5, y - 5, 10, 10)
-            } else {
-                var newPoint = { x: x, y: y }
-                drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
-                lastPoint = newPoint
+        canvas.onmousemove = function (e) {
+            var x = e.clientX
+            var y = e.clientY
+            if (using){
+                if (isUsingEraser) {
+                    ctx.clearRect(x - 5, y - 5, 10, 10)
+                } else {
+                    var newPoint = { x: x, y: y }
+                    drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
+                    lastPoint = newPoint
+                }
             }
         }
 
-        canvas.onmouseup = function (a) {
+        canvas.onmouseup = function (e) {
             using = false
         }
     }
