@@ -7,83 +7,21 @@ listenToUser(canvas)
 
 var isUsingEraser = false
 /*功能选择*/
+$('.actions').on('click','li',function(e){
+    $('.colors>li.active').removeClass('active')
+    $(e.currentTarget).addClass('active')
+})
+
 eraser.onclick = function () {
     isUsingEraser = true
-    $('.actions>li.active').removeClass('active')
-    $('#eraser').addClass('active')
 }
 
 brush.onclick = function () {
     isUsingEraser = false
-    $('.actions>li.active').removeClass('active')
-    $('#brush').addClass('active')
 }
-
-
-$('#black').on('click',()=>{
-    $('.colors>li.active').removeClass('active')
-    $('#black').addClass('active')
-})
-// black.onclick = function () {
-//     ctx.strokeStyle = "black"
-//     black.classList.add('active')
-//     red.classList.remove('active')
-//     green.classList.remove('active')
-//     blue.classList.remove('active')
-//     //用jQuery上面三句可以用$('.active').removeClass('active')一句代替
-// }
-$('#white').on('click',()=>{
-    $('.colors>li.active').removeClass('active')
-    $('#white').addClass('active')
-    ctx.strokeStyle = "white"
-})
-$('#red').on('click',()=>{
-    $('.colors>li.active').removeClass('active')
-    $('#red').addClass('active')
-    ctx.strokeStyle = "red"
-})
-$('#green').on('click',()=>{
-    $('.colors>li.active').removeClass('active')
-    $('#green').addClass('active') 
-    ctx.strokeStyle = "green"
-})
-$('#blue').on('click',()=>{
-    $('.colors>li.active').removeClass('active')
-    $('#blue').addClass('active')
-    ctx.strokeStyle = "blue"
-})
-$('#grey').on('click',()=>{
-    $('.colors>li.active').removeClass('active')
-    $('#grey').addClass('active')
-    ctx.strokeStyle = "grey"
-})
-$('#yellow').on('click',()=>{
-    $('.colors>li.active').removeClass('active')
-    $('#yellow').addClass('active')
-    ctx.strokeStyle = "yellow"
-})
-
-
-thin.onclick = function () {
-    lineWidth = 3
-    $('.sizes>li.active').removeClass('active')
-    $('#thin').addClass('active')
-}
-medium.onclick = function () {
-    lineWidth = 6
-    $('.sizes>li.active').removeClass('active')
-    $('#medium').addClass('active')
-}
-thick.onclick = function () {
-    lineWidth = 9
-    $('.sizes>li.active').removeClass('active')
-    $('#thick').addClass('active')
-}
-
+    
 clear.onclick = function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    $('.actions>li.active').removeClass('active')
-    $('#clear').addClass('active')
 }
 
 download.onclick = function () {
@@ -94,12 +32,42 @@ download.onclick = function () {
     saveCanvas.download = "我的画"
     saveCanvas.target = "_blank"
     saveCanvas.click()
-    $('.actions>li.active').removeClass('active')
-    $('#download').addClass('active')
 }
+/*画笔颜色选择*/
+$('.colors').on('click','li',function(e){
+    $('.colors>li.active').removeClass('active')
+    $(e.currentTarget).addClass('active')
+    let color=e.currentTarget.id
+    ctx.strokeStyle=color
+})
+
+/*
+black.onclick = function () {
+    ctx.strokeStyle = "black"
+    black.classList.add('active')
+    red.classList.remove('active')
+    green.classList.remove('active')
+    blue.classList.remove('active')
+    //用jQuery上面三句可以用$('.active').removeClass('active')一句代替
+}
+*/
+
+/*画笔粗细选择*/
+$('.sizes').on('click','li',function(e){
+    $('.sizes>li.active').removeClass('active')
+    $(e.currentTarget).addClass('active')
+    let id=e.currentTarget.id
+    if(id==='thin'){
+        lineWidth = 3
+    }else if(id==='medium'){
+        lineWidth = 6
+    }else if(id==='thick'){
+        lineWidth = 9
+    }
+})
 
 
-/********/
+/****工具函数****/
 
 function autoSetSize(canvas) {
     setSize()
@@ -133,7 +101,6 @@ function listenToUser(canvas) {
             var x = e.touches[0].clientX
             var y = e.touches[0].clientY
             using = true
-
             if (isUsingEraser) {
                 ctx.clearRect(x - 5, y - 5, 10, 10)
             } else {
@@ -162,7 +129,6 @@ function listenToUser(canvas) {
             var x = e.clientX
             var y = e.clientY
             using = true
-
             if (isUsingEraser) {
                 ctx.clearRect(x, y, 10, 10)
             } else {
